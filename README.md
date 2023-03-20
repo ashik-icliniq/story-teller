@@ -22,3 +22,6 @@ Followed by this documentation. Storybook test-runner is installed.
 
 **Fixation - Downgrading storybook test-runner to specific version**
 > npm i @storybook/test-runner@0.6.2
+
+# Configure Jest
+>  npm i @storybook/jest
