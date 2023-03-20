@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { within } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 import { Button } from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -20,6 +21,15 @@ export const Primary = Template.bind({});
 Primary.args = {
   primary: true,
   label: 'Button',
+};
+
+Primary.play = async ({ canvasElement }) => {
+  const canvas= within(canvasElement);
+
+  const primaryButton = await canvas.getByRole('button', {name : /Button/i} );
+
+  await expect(primaryButton.innerText).toBe('Hello')
+
 };
 
 export const Secondary = Template.bind({});
