@@ -25,3 +25,11 @@ Followed by this documentation. Storybook test-runner is installed.
 
 # Configure Jest
 >  npm i @storybook/jest
+
+### Common Issues Identified
+
+------------
+
+1. Storybook Build Failed
+`this[kHandle] = new _Hash(algorithm, xofLen); ^Error: envelope routines::unsupported`
+Refer this document for solution - [Click here](https://onlinessolution.blogspot.com/2021/11/error-error0308010cdigital-envelope.html "Click here")
