@@ -1,6 +1,6 @@
 # Storybook Setup
 
-Followed by this documentation. Storybook is installed.
+Followed by this documentation. Storybook is installed.\
 [Story Book Installation](https://storybook.js.org/docs/react/get-started/install "Story Book Installation")
 
 ## Problems faced while installation and running storybook
@@ -30,6 +30,6 @@ Followed by this documentation. Storybook test-runner is installed.
 
 ------------
 
-1. Storybook Build Failed
-`this[kHandle] = new _Hash(algorithm, xofLen); ^Error: envelope routines::unsupported`
+1. Storybook Build Failed\
+`this[kHandle] = new _Hash(algorithm, xofLen); ^Error: envelope routines::unsupported`\
 Refer this document for solution - [Click here](https://onlinessolution.blogspot.com/2021/11/error-error0308010cdigital-envelope.html "Click here")
