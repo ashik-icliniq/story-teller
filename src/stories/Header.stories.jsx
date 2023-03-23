@@ -1,24 +1,68 @@
 import React from 'react';
+import { within, fireEvent , userEvent, screen} from '@storybook/testing-library';
+import { action } from '@storybook/addon-actions';
+import { expect } from '@storybook/jest';
+import Header from '../components/Header';
+import "./global-test.css"
+import * as CONSTANTS from '../constants';
 
-import { Header } from './Header';
+
+const hoverTest = async (canvas, elem) => {
+  // Mouse Hover and Check Color
+  const hoverElem = canvas.getByText(elem)
+  await fireEvent.mouseOver(hoverElem);
+  await expect(hoverElem).toHaveClass('md:hover:bg-transparent md:hover:text-blue-700')
+}
+
+const clickTest = async (canvas, elem, obj = false) => {
+
+  const clickElem = canvas.getByText(elem)
+  await userEvent.click(clickElem);
+
+  if(obj){
+    // Toggle to open Menu and Check the tool tip menu visiblity
+    const menuOptions = await canvas.getByTestId('flowbite-tooltip');
+    await expect(menuOptions).not.toHaveStyle('visiblity: hidden')
+
+  
+    // Toggle to close Menu and Check the tool tip menu invisible
+    await userEvent.click(clickElem);
+    await expect(menuOptions).toHaveClass('invisible')
+  }
+  
+}
 
 export default {
   title: 'Example/Header',
-  component: Header,
-  parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-    layout: 'fullscreen',
-  },
+  component: Header
 };
 
 const Template = (args) => <Header {...args} />;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  user: {
-    name: 'Jane Doe',
-  },
+export const MenuHoverTest = Template.bind({});
+MenuHoverTest.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  CONSTANTS.NAV_MENU.map((options) => {
+      typeof options === 'object' ?
+        Object.keys(options).map((result) => {
+          hoverTest(canvas, result)
+        })
+      :
+      hoverTest(canvas, options)
+  })
+
 };
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {};
+export const MenuClickTest = Template.bind({});
+MenuClickTest.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  CONSTANTS.NAV_MENU.map((options) => {
+      typeof options === 'object' ?
+        Object.keys(options).map((result) => {
+          clickTest(canvas, result, true)
+        })
+      :
+      clickTest(canvas, options)
+  })
+
+};
