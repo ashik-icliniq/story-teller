@@ -4,12 +4,17 @@ import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import "./global-test.css"
 import LiveSpecialist from '../components/askDoctor/LiveSpecialist';
-import { act } from '@testing-library/react';
+
+
+import fetchMock from 'fetch-mock'
+const users = [{ drName: 'bob' }];
+fetchMock.mock('https://api.npoint.io/aec0bf1f1d18c0d32311', users);
 
 
 export default {
   title: 'Example/LiveSpecialist',
-  component: LiveSpecialist
+  component: LiveSpecialist,
+  argTypes: { handleSubmitClick: {action: 'LiveSpecialist' }}
 };
 
 const Template = (args) => <LiveSpecialist  {...args} />;
@@ -30,14 +35,11 @@ LiveSpecialistCard.play = async ({ canvasElement }) => {
   const submitButton = await canvas.getByRole('button', { name: 'Submit' });
   await expect(submitButton).toHaveStyle('background-color: rgb(26 86 219)');
 
-  await act(() => {
-    userEvent.hover(submitButton)
+  userEvent.hover(submitButton)
 
-  });
+
   expect(submitButton).toHaveClass(' hover:bg-blue-800');
-  await act(() => {
-    userEvent.unhover(submitButton)
-  });
+  userEvent.unhover(submitButton)
 
 
 }
