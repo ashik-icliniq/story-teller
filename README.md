@@ -1,5 +1,7 @@
 # Storybook Setup
 
+npx sb init
+
 Followed by this documentation. Storybook is installed.\
 [Story Book Installation](https://storybook.js.org/docs/react/get-started/install "Story Book Installation")
 
